@@ -48,7 +48,7 @@ const createCard = (character) => {
 
 const createTransformationCards = (transformations) => {
     transformations.forEach(transformation => {
-        createCard(transformation); // Usar la misma función para crear cartas
+        createCard(transformation);
     });
 }
 
@@ -85,20 +85,27 @@ const getCharacterByName = async (event) => {
     }, 300);
 }
 
-const raceButtons = document.querySelectorAll('.race-button');
-raceButtons.forEach(button => {
-    button.addEventListener('click', async () => {
-        const race = button.textContent; // Obtener el texto del botón
-        containerCards.innerHTML = ""; // Limpiar el contenedor
-        const data = await getApi(`${BASE_URL}?race=${race}`); // Hacer la consulta a la API
-        if (data.length > 0) {
-            data.forEach(createCard);
-        } else {
-            const noResults = document.createElement('p');
-            noResults.textContent = "No se encontraron personajes de la raza " + race + ".";
-            noResults.classList.add('no-results');
-            containerCards.appendChild(noResults);
-        }
+const buttons = document.querySelectorAll('.race-button, .affiliation-button');
+
+const busquedaRazaAfiliacion = async (type, value) => {
+    containerCards.innerHTML = ""; // Limpiar el contenedor
+    const data = await getApi(`${BASE_URL}?${type}=${value}`); // Hacer la consulta a la API
+    if (data.length > 0) {
+        data.forEach(createCard);
+    } else {
+        const noResults = document.createElement('p');
+        noResults.textContent = `No se encontraron personajes de la ${type === 'race' ? 'raza' : 'afiliación'} ${value}.`;
+        noResults.classList.add('no-results');
+        containerCards.appendChild(noResults);
+    }
+};
+
+// Manejar clics en botones de raza y afiliación
+buttons.forEach(button => {
+    button.addEventListener('click', () => {
+        const type = button.classList.contains('race-button') ? 'race' : 'affiliation'; // Determinar el tipo
+        const value = button.textContent; // Obtener el texto del botón
+        busquedaRazaAfiliacion(type, value); // Llamar a la función genérica
     });
 });
 

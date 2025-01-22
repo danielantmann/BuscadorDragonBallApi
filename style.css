@@ -149,7 +149,7 @@ p{
     padding: 1rem;
 }
 
-.description-card>h2 {
+.description-card>h2  {
     text-align: center;
     color: #ffff00;
     text-shadow: 0 0 15px white;
@@ -177,6 +177,96 @@ p{
     margin-top: 20px;
 }
 
+/* Estilos para el contenedor principal */
+.extended-card {
+    width: 80%; /* El contenedor ocupa el 80% del ancho de la pantalla */
+    margin: 0 auto; /* Centrar el contenedor en la página */
+    display: flex; /* Usar flexbox para alinear elementos */
+    gap: 10px;
+}´
+
+.character-name {
+    text-align: center; /* Centrar el texto del nombre */
+    margin-bottom: 10px; /* Espaciado debajo del nombre */
+}
+
+
+.extended-card>.description-card2{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem;
+    background-color: #261b36;
+
+}
+.description-card2>p {
+font-size: 1.5rem;
+margin: 2px;
+color: white;
+}
+
+.description-card2>h1{
+    text-align: center;
+    color: #ffff00;
+    text-shadow: 0 0 15px white;
+    margin-bottom: 0.5rem;
+    align-self: center;
+    font-size: 3rem;
+}
+
+/* Estilos para la imagen */
+.character-img {
+    width: 25%; /* La imagen ocupa 1/4 del ancho del contenedor */
+    height: auto; /* Mantener la proporción de la imagen */
+}
+
+/* Estilos para la descripción */
+.description-card {
+    width: 75%; /* La descripción ocupa 3/4 del ancho del contenedor */
+    padding: 10px; /* Espaciado interno */
+}
+
+.transformations-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columnas */
+    gap: 10px; /* Espacio entre las tarjetas de transformación */
+    width: 80%; /* Asegúrate de que ocupe el ancho completo */
+    margin-top: 20px; /* Espacio entre la descripción y las transformaciones */
+}
+
+
+
+@media (max-width: 768px) {
+    .extended-card {
+        flex-direction: column; /* Cambiar a columna en pantallas más pequeñas */
+        align-items: center; /* Centrar los elementos */
+    }
+
+    .character-img {
+        width: 100%; /* La imagen ocupa el 100% del ancho en pantallas pequeñas */
+        max-width: 300px; /* Limitar el tamaño máximo de la imagen */
+    }
+
+    .description-card2 {
+        width: 100%; /* La descripción ocupa el 100% del ancho en pantallas pequeñas */
+    }
+
+    .transformations-container {
+        grid-template-columns: repeat(2, 1fr); /* 2 columnas en tabletas */
+    }
+}
+
+@media (max-width: 480px) {
+    .transformations-container {
+        grid-template-columns: 1fr; /* 1 columna en móviles */
+    }
+
+    .character-img {
+        max-width: 200px; /* Limitar el tamaño máximo de la imagen en móviles */
+    }
+}
 /* Media Queries para Responsividad */
 @media (max-width: 768px) {
     h1 {

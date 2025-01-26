@@ -5,6 +5,35 @@ const containerCards2 = document.getElementById('containerCards2');
 const BASE_URL = 'https://dragonball-api.com/api/characters';
 const URL_CHARACTER = 'https://dragonball-api.com/api/characters?name=';
 
+//Cargar botones principales
+if (document.URL.match('.\/index.html$')) {
+    let botonesRace = ["Human", "Saiyan", "Namekian", "Majin", "Frieza Race", "Android", "Jiren Race", "God", "Angel", "Evil", "Nucleico", "Nucleico benigno", "Unkwnown"];
+    let botonesAffiliation = ["Z Fighter", "Freelancer", "Army of Frieza", "Pride Troopers", "Assistant of Vermoud", "Assistant of Beerus", "Villain", "Other"];
+
+    let nodoDivRace = document.querySelector('nav').children[0];
+    let nodoDivAffiliation = document.querySelector('nav').children[1];
+
+    botonesRace.forEach(textoBoton => {
+        let nodoBoton = document.createElement('button');
+        nodoBoton.setAttribute('class', 'race-button');
+
+        let nodoTexto = document.createTextNode(textoBoton);
+        nodoBoton.append(nodoTexto);
+
+        nodoDivRace.appendChild(nodoBoton);
+    });
+
+    botonesAffiliation.forEach(textoBoton => {
+        let nodoBoton = document.createElement('button');
+        nodoBoton.setAttribute('class', 'affiliation-button');
+
+        let nodoTexto = document.createTextNode(textoBoton);
+        nodoBoton.append(nodoTexto);
+
+        nodoDivAffiliation.appendChild(nodoBoton);
+    });
+    
+}
 const getApi = async (url) => {
     try {
         const response = await fetch(url);

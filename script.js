@@ -103,7 +103,7 @@ const createExtendedCard = (character, container) => {
     const transformationsContainer = document.getElementById('transformaciones'); // Obtener el contenedor de transformaciones
     if (character.transformations && character.transformations.length > 0) {
         console.log(character.transformations);
-        
+                
         // Título para transformaciones
 
 
@@ -156,6 +156,10 @@ const getCharacterByName = async (event) => {
                 data.forEach(createCard); // Crear la carta del personaje principal
               if ( dataEvo = await getApi(`${BASE_URL}/${data[0].id}`)) {
                 if (dataEvo.transformations.length > 0) {
+                    for (let i = 0; i < dataEvo.transformations.length; i++) {
+
+                        dataEvo.transformations[i].id = dataEvo.id;                          
+                    }
                     createTransformationCards(dataEvo.transformations);                    
                 }
             }

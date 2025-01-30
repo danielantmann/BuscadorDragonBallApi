@@ -1,6 +1,8 @@
+
 const txtCharacter = document.getElementById("txt-character");
 const containerCards = document.getElementById("containerCards");
 const containerCards2 = document.getElementById("containerCards2");
+acces.setAttribute("estado", "cerrado");
 const accesibilidadBotons = [
   ["monocromo", "./img/monocromo.png", "Convertir colores a blanco y negro."],
   ["lupa", "./img/lupa.png", "Hace zoom para ver de manera más óptima."],
@@ -300,18 +302,41 @@ if (document.getElementById("txt-character")) {
 }
 
 acces.addEventListener("click", function () {
-  let nodo = document.createDocumentFragment();
-  let menu = document.createElement("div");
-  menu.className = "menu-acces";
-  menu.style.display = "flex";
-  menu.style.flexWrap = "wrap";
-  anyadirBtnAcces(menu);
-  nodo.appendChild(menu);
-  acces.appendChild(nodo);
-
-  // Activar la transición después de que el menú se haya añadido al DOM
-  // Retardo muy pequeño para permitir que el DOM se actualice
+  let menu;
+  if (acces.getAttribute("estado") !== "moviendo") { 
+    if (acces.getAttribute("estado") === "cerrado") {
+      menu = document.createElement("div");
+      menu.className = "menu-acces";
+      menu.style.display = "flex";
+      menu.style.flexWrap = "wrap";
+      anyadirBtnAcces(menu); 
+      let nodo = document.createDocumentFragment();
+      nodo.appendChild(menu);
+      acces.appendChild(nodo);
+      gsap.set(menu, {y: -450, opacity: 0});
+      acces.setAttribute("estado", "moviendo");
+      gsap.to(menu, { y: -525, duration: 2, ease: "power2.out", opacity: 1, 
+        onComplete: function() {
+          acces.setAttribute("estado", "abierto"); 
+        }
+      }); 
+    } else if (acces.getAttribute("estado") === "abierto") {
+      menu = acces.querySelector(".menu-acces"); 
+      if (menu) {
+        acces.setAttribute("estado", "moviendo");
+        gsap.to(menu, { y: -450, duration: 2, ease: "power2.in", opacity: 0,
+          onComplete: function() {
+            acces.removeChild(menu);  
+            acces.setAttribute("estado", "cerrado"); 
+          }
+        });
+      }
+    }
+  }
 });
+
+
+
 
 function anyadirBtnAcces(menu) {
   accesibilidadBotons.forEach((boton) => {
@@ -319,6 +344,7 @@ function anyadirBtnAcces(menu) {
     let nodoImg = document.createElement("div");
     let nodoText = document.createElement("div");
     nodo.id = boton[0];
+    nodo.className = "funciones";
     nodo.style.display = "flex";
     nodo.style.justifyContent = "center";
     nodo.style.alignItems = "center";

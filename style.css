@@ -15,17 +15,17 @@
     align-items: center;
    }
    
-   .menu-acces{
+   .menu-acces {
     position: fixed;
     width: 35%;
-    left: 10%;
-    bottom: 90px;
+    left: 5%;
     height: 80%;
-    background-color: white; ;
-    transition: left 1s ease-in-out; /* Animamos la propiedad 'left' */
-   }
-   
-   .acces{
+    background-color: white;
+    box-shadow: 0px 5px 10px 1px;
+    border-radius: 20px;
+}
+
+.acces {
     cursor: pointer;
     border-radius: 20px;
     background: url('./img/accesibilidad.png') white;
@@ -36,7 +36,9 @@
     left: 5%;
     height: 60px;
     width: 60px;
-   }
+}
+
+
    
    
    nav {

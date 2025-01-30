@@ -248,3 +248,57 @@ if (document.getElementById('txt-character')) {
     // Página extendedCard.html
     window.addEventListener('DOMContentLoaded', loadCharacterData);
 }
+
+//Footer
+//Creamos el contenedor con la etiqueta footer
+let nodoEspacio = document.createDocumentFragment();
+let nodoFooter = document.createElement('footer');
+
+//Contenedor con el enlace al código fuente del proyecto
+let nodoContenido = document.createElement('div');
+nodoContenido.id = "Contenido1";
+
+//Creamos el parrafo
+let nodoParrafo = document.createElement('p');
+nodoParrafo.textContent = 'Si quiere conocer el código fuente acceda desde el siguiente enlace:';
+
+//Creamos el enlace al código fuente
+let nodoEnlace = document.createElement('a');
+nodoEnlace.setAttribute('href', 'https://github.com/danielantmann/BuscadorDragonBallApi');
+nodoEnlace.setAttribute('target', '_blank');
+nodoEnlace.textContent = 'Código fuente del proyecto';
+
+//Añadimos el contenido 1
+nodoContenido.appendChild(nodoParrafo);
+nodoContenido.appendChild(nodoEnlace);
+
+//Añadimos el contenido al footer
+nodoFooter.appendChild(nodoContenido);
+
+//Vaciamos el nodoContenido y el nodoParrafo
+nodoContenido = undefined;
+nodoParrafo = undefined;
+
+//Contenedor donde va a ir el copyright
+nodoContenido = document.createElement('div');
+nodoContenido.id = "Contenido2";
+
+let nodoImagen = document.createElement('img');
+nodoImagen.setAttribute('src', './img/copyright.png');
+nodoImagen.setAttribute('alt', 'Imagen de derechos de autor de la página.');
+
+nodoParrafo = document.createElement('p');
+nodoParrafo.textContent = 'Copyright 2025'
+
+//Contenido 2
+nodoContenido.appendChild(nodoImagen);
+nodoContenido.appendChild(nodoParrafo);
+
+//Añadimos el contenido al footer
+nodoFooter.appendChild(nodoContenido);
+
+//Insertamos el footer en el espacio del documento
+nodoEspacio.appendChild(nodoFooter);
+
+//Insertamos el footer creado en el body
+document.body.appendChild(nodoEspacio);

@@ -7,6 +7,7 @@
     /* Asegura que el padding y el border no afecten el tamaño total */
 }
 
+
 body {
     width: 100vw;
     height: auto;
@@ -48,6 +49,7 @@ nav button {
     /* Cambiar el cursor al pasar sobre el botón */
     transition: background-color 0.3s, transform 0.2s;
     /* Transiciones suaves para efectos */
+
 }
 
 nav button:hover {
@@ -234,6 +236,50 @@ color: white;
     gap: 10px; /* Espacio entre las tarjetas de transformación */
     width: 80%; /* Asegúrate de que ocupe el ancho completo */
     margin-top: 20px; /* Espacio entre la descripción y las transformaciones */
+}
+
+footer {
+    display: grid;
+    padding-top: 5px;
+    font-family: "Delicious Handrawn", serif;
+    background-color: black;
+    color: white;
+    font-size: x-large;    
+    margin-top: 5%;
+    height: 200px;
+    width: 100%;
+    opacity: 85%;
+}
+
+footer #Contenido1 {
+    margin-left: 15px;
+}
+
+footer #Contenido1 a {
+    color: white;
+    text-decoration: none;
+    transition: all 1s;
+    margin-left: 15px;
+}
+
+footer #Contenido1 a:hover {
+    color: #2909ab;
+    text-decoration: underline;
+}
+
+footer #Contenido2 {
+    justify-self: center;
+    padding-top: 5px;
+}
+
+footer #Contenido2 img {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+}
+
+footer #Contenido2 p {
+    display: inline;    
 }
 
 

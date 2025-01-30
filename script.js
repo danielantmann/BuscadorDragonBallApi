@@ -1,4 +1,3 @@
-
 const txtCharacter = document.getElementById("txt-character");
 const containerCards = document.getElementById("containerCards");
 const containerCards2 = document.getElementById("containerCards2");
@@ -303,41 +302,85 @@ if (document.getElementById("txt-character")) {
 
 acces.addEventListener("click", function () {
   let menu;
-  if (acces.getAttribute("estado") !== "moviendo") { 
+  if (acces.getAttribute("estado") !== "moviendo") {
     if (acces.getAttribute("estado") === "cerrado") {
       menu = document.createElement("div");
       menu.className = "menu-acces";
       menu.style.display = "flex";
       menu.style.flexWrap = "wrap";
-      anyadirBtnAcces(menu); 
+      menu.style.marginLeft= "10px"
+      anyadirBtnAcces(menu);
       let nodo = document.createDocumentFragment();
       nodo.appendChild(menu);
       acces.appendChild(nodo);
-      gsap.set(menu, {y: -450, opacity: 0});
+      gsap.set(menu, { y: -825, x:-400, opacity: 0 });
       acces.setAttribute("estado", "moviendo");
-      gsap.to(menu, { y: -525, duration: 2, ease: "power2.out", opacity: 1, 
-        onComplete: function() {
-          acces.setAttribute("estado", "abierto"); 
+      gsap.to(menu, {
+        y: -825,
+        x:-100,
+        duration: 1,
+        ease: "power2.out",
+        opacity: 1,
+        onComplete: function () {
+          acces.setAttribute("estado", "abierto");
+        },
+      });
+
+      // Delegación de eventos para los elementos de funciones dentro de menu
+      menu.addEventListener("click", function (e) {
+        e.stopPropagation();
+        const botonClickeado = e.target.closest(".funciones");
+        console.log(botonClickeado);
+        if (botonClickeado) {
+          const botonId = botonClickeado.id;
+          container.setAttribute("estado","modificado");
+          if (botonId === "monocromo") {
+                container.style.filter =  "saturate(0)";
+          } else if (botonId === "lupa") {
+            alert("Aumenta la intensidad de los colores.");
+          } else if (botonId === "saturacion-high") {
+            container.style.filter =  "saturate(3)";
+          } else if (botonId === "saturacion-low") {
+            container.style.filter =  "saturate(1)";
+          } else {
+            console.log("Botón no manejado:", botonId);
+          }
         }
-      }); 
+      });
     } else if (acces.getAttribute("estado") === "abierto") {
-      menu = acces.querySelector(".menu-acces"); 
+      menu = acces.querySelector(".menu-acces");
       if (menu) {
         acces.setAttribute("estado", "moviendo");
-        gsap.to(menu, { y: -450, duration: 2, ease: "power2.in", opacity: 0,
-          onComplete: function() {
-            acces.removeChild(menu);  
-            acces.setAttribute("estado", "cerrado"); 
-          }
+        gsap.set(menu, { y: -825, opacity: 1 });
+        gsap.to(menu, {
+          y: -650,
+          duration: 1,
+          ease: "power2.in",
+          opacity: 0,
+          onComplete: function () {
+            acces.removeChild(menu);
+            acces.setAttribute("estado", "cerrado");
+          },
         });
       }
     }
   }
 });
-
-
-
-
+container.addEventListener("DOMAttrModified", function(e){
+  e.stopPropagation();
+    if (container.getAttribute("estado")==="modificado") {
+      let nodo = document.createElement("div");
+      nodo.id = "restaurar"
+      nodo.style.backgroundImage = "url('./img/x.png')";
+      nodo.style.backgroundColor = "white";
+      nodo.style.borderRadius = "20px";
+      nodo.style.width = "60px";
+      nodo.style.height = "60px";
+      nodo.style.backgroundSize = "contain";
+      nodo.style.backgroundRepeat = "no-repeat";
+      acces.appendChild(nodo);
+    }
+});
 function anyadirBtnAcces(menu) {
   accesibilidadBotons.forEach((boton) => {
     let nodo = document.createElement("div");
@@ -352,7 +395,7 @@ function anyadirBtnAcces(menu) {
     nodo.style.width = "50%";
     nodo.style.height = "50%";
     nodoImg.className = "img-btnacces";
-    nodoImg.style.backgroundImage = "url('"+ boton[1] +"')"; 
+    nodoImg.style.backgroundImage = "url('" + boton[1] + "')";
     nodoImg.style.width = "30%";
     nodoImg.style.height = "30%";
     nodoImg.style.backgroundSize = "contain";
@@ -364,3 +407,4 @@ function anyadirBtnAcces(menu) {
     menu.appendChild(nodo);
   });
 }
+

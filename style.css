@@ -5,6 +5,7 @@
     padding: 0;
     box-sizing: border-box;
     /* Asegura que el padding y el border no afecten el tamaño total */
+    cursor: url('./img/puntero.png');
 }
 
 
